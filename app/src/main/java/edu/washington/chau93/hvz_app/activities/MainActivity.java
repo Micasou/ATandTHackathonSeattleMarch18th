@@ -1,16 +1,13 @@
-package edu.washington.chau93.hvz_app;
+package edu.washington.chau93.hvz_app.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import edu.washington.chau93.hvz_app.models.AboutActivity;
+import edu.washington.chau93.hvz_app.R;
 import edu.washington.chau93.hvz_app.models.FirebaseHelper;
-import edu.washington.chau93.hvz_app.models.RulesActivity;
 
 public class MainActivity extends AppCompatActivity {
     protected static FirebaseHelper myFirebaseHelper;
@@ -55,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         myGamesButton.setOnClickListener(new MapClickListener());
         myRulesButton.setOnClickListener(new MenuButtonListener(RulesActivity.class));
         myAboutButton.setOnClickListener(new MenuButtonListener(AboutActivity.class));
+        myLogoutButton.setOnClickListener(new LogoutClickListener());
     }
     /**
      * Listens to the click on Maps for testing purposes button.
@@ -88,6 +86,20 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, myClass);
             startActivity(intent);
+        }
+    }
+
+    /**
+     * Listens to logout click.
+     */
+    private class LogoutClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            myFirebaseHelper.logout();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

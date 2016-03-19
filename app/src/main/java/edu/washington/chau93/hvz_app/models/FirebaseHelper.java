@@ -33,6 +33,8 @@ public class FirebaseHelper extends Observable {
         return myBaseRef.getAuth();
     }
 
+    public void logout() { myBaseRef.unauth(); }
+
     public void createNewUser(User theUser) {
 
     }
