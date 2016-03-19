@@ -2,6 +2,7 @@ package edu.washington.chau93.hvz_app.models;
 
 import android.content.Context;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 
 import java.util.Observable;
@@ -26,6 +27,14 @@ public class FirebaseHelper extends Observable {
         myUsersRef = myBaseRef.child("users");
         myGamesRef = myBaseRef.child("games");
         myModeRef = myBaseRef.child("modes");
+    }
+
+    public AuthData getAuth() {
+        return myBaseRef.getAuth();
+    }
+
+    public void createNewUser(User theUser) {
+
     }
 
     // Create a game given an game object
