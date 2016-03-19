@@ -74,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
             // Pass user login information to login page
             intent.putExtra("username", myEmail.getText().toString());
             intent.putExtra("password", myPassword.getText().toString());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
 //            ref.authWithPassword(myEmail.getText().toString(), myPassword.getText().toString(), new loginAuthResultHandler());
