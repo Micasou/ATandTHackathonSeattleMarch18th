@@ -67,7 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         myPublishGameButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MapsActivity.this,"TEST BUTTONG",Toast.LENGTH_LONG ).show();;
+//                Toast.makeText(MapsActivity.this,"TEST BUTTONG",Toast.LENGTH_LONG ).show();;
                 Bundle extras = myGameIntent.getExtras();
                 if (extras != null) {
                     String GAME_TITLE = extras.getString("GAME_TITLE");

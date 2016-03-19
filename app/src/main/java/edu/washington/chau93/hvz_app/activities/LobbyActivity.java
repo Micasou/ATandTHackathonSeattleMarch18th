@@ -3,6 +3,7 @@ package edu.washington.chau93.hvz_app.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -98,7 +99,8 @@ public class LobbyActivity extends AppCompatActivity implements Observer {
         private class ItemOnClickListener implements View.OnClickListener {
             @Override
             public void onClick(View v) {
-                DialogInterface.OnClickListener dialogClickListener = new DialogListener();
+                TextView textView = (TextView) v.findViewById(R.id.game_list_item_game_uid);
+                DialogInterface.OnClickListener dialogClickListener = new DialogListener(textView.getText().toString());
 
                 AlertDialog.Builder ab = new AlertDialog.Builder(LobbyActivity.this);
                 ab.setMessage("Would you like to join this game?").setPositiveButton("Join!", dialogClickListener)
@@ -107,11 +109,21 @@ public class LobbyActivity extends AppCompatActivity implements Observer {
         }
 
         private class DialogListener implements DialogInterface.OnClickListener {
+            private String myGameId;
+            public DialogListener(String theGameId) {
+                myGameId = theGameId;
+            }
+
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         // Move them to the map again.
+                        Intent mapIntent = new Intent(LobbyActivity.this, InGameMapsActivity.class);
+                        mapIntent.putExtra("gameId", myGameId);
+                        mapIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(mapIntent);
+                        finish();
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
