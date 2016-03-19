@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Number of Players:   "
-            android:id="@+id/textView"
+            android:id="@+id/player_text"
             android:layout_marginTop="33dp"
             android:layout_below="@+id/game_creator"
             android:layout_alignEnd="@+id/join_game_button" />
@@ -52,9 +52,9 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="33/50"
-            android:id="@+id/textView2"
-            android:layout_alignTop="@+id/textView"
-            android:layout_toEndOf="@+id/textView" />
+            android:id="@+id/player_count"
+            android:layout_alignTop="@+id/player_text"
+            android:layout_toEndOf="@+id/player_text" />
 
         <TextView
             android:layout_width="wrap_content"
