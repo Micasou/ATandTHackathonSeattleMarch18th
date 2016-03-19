@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:text="Nearby Games"
+        android:id="@+id/button"
+        android:layout_alignParentTop="true"
+        android:textSize="30dp"
+        android:background="@color/colorGreen" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:text="Rules"
+        android:id="@+id/button2"
+        android:layout_below="@+id/games_button"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:background="@color/colorLime" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:text="About"
+        android:id="@+id/button3"
+        android:layout_below="@+id/rules_button"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:background="@color/colorYellow" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:text="Login / Logout"
+        android:id="@+id/button5"
+        android:layout_below="@+id/about_button"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:background="@color/colorPink" />
+</LinearLayout>
