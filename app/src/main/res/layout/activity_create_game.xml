@@ -84,7 +84,8 @@
         android:id="@+id/start_date_button"
         android:layout_below="@+id/tableLayout"
         android:layout_alignEnd="@+id/start_date_text"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:onClick="showDatePickerDialog"/>
 
     <TextView
         android:layout_width="wrap_content"
