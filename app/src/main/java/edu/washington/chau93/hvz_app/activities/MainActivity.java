@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         setContentView(R.layout.activity_menu);
 
         // Connect the layout button elements to this activity
-        myGamesButton = (Button) findViewById(R.id.games_button);
+        myGamesButton = (Button) findViewById(R.id.create_button);
         myRulesButton = (Button) findViewById(R.id.rules_button);
         myAboutButton = (Button) findViewById(R.id.about_button);
         myLogoutButton = (Button) findViewById(R.id.logout_button);
@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
      * This method sets up all the menu activities used.
      */
     private void setupMenuButtons() {
-        myGamesButton.setOnClickListener(new MapClickListener());
-
 //        myGamesButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -100,21 +98,12 @@ public class MainActivity extends AppCompatActivity implements Observer {
 //            }
 //        });
 //        myGamesButton.setOnClickListener(new MenuButtonListener(GameDetailsActivity.class));
+        myGamesButton.setOnClickListener(new MenuButtonListener(CreateGameActivity.class));
         myRulesButton.setOnClickListener(new MenuButtonListener(RulesActivity.class));
         myAboutButton.setOnClickListener(new MenuButtonListener(AboutActivity.class));
         myLogoutButton.setOnClickListener(new LogoutClickListener());
     }
-    /**
-     * Listens to the click on Maps for testing purposes button.
-     */
-    private class MapClickListener implements View.OnClickListener {
 
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            startActivity(intent);
-        }
-    }
 
     private Game testGame;
     @Override

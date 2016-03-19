@@ -7,11 +7,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Nearby Games"
-        android:id="@+id/games_button"
+        android:text="Create Game"
+        android:id="@+id/create_button"
         android:layout_alignParentTop="true"
         android:textSize="30dp"
-        android:background="@color/colorBlue" />
+        android:background="#D4EB51" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Join Game"
+        android:id="@+id/join_button"
+        android:layout_below="@+id/create_button"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:background="#9DC28C" />
 
     <Button
         android:layout_width="match_parent"
@@ -19,10 +30,10 @@
         android:layout_weight="1"
         android:text="Rules"
         android:id="@+id/rules_button"
-        android:layout_below="@+id/games_button"
+        android:layout_below="@+id/join_button"
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
-        android:background="@color/colorLime" />
+        android:background="#7FB384" />
 
     <Button
         android:layout_width="match_parent"
@@ -33,7 +44,7 @@
         android:layout_below="@+id/rules_button"
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
-        android:background="@color/colorYellow" />
+        android:background="#61A47C" />
 
     <Button
         android:layout_width="match_parent"
@@ -44,5 +55,5 @@
         android:layout_below="@+id/about_button"
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
-        android:background="@color/colorPink" />
+        android:background="#7B8A68" />
 </LinearLayout>
