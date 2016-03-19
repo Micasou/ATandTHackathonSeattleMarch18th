@@ -8,11 +8,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import edu.washington.chau93.hvz_app.models.FirebaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     protected static FirebaseHelper myFirebaseHelper;
+
+    /** The button used to search for nearby games. */
+    private Button myGamesButton;
+    /** The button used to show the rules of HvZ. */
+    private Button myRulesButton;
+    /** The button used to about page. */
+    private Button myAboutButton;
+    /** The button used to log out. */
+    private Button myLogoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
