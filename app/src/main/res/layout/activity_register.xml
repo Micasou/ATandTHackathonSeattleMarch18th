@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText"
+                android:id="@+id/registerPasswordConfirm"
                 android:layout_weight="5"
                 android:hint="Re-Enter Password" />
 
@@ -145,6 +145,11 @@
             android:layout_height="wrap_content"
             android:text="Register"
             android:id="@+id/registerRegisterBtn"
+            android:layout_gravity="center_horizontal" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
