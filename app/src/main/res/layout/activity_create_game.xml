@@ -45,7 +45,9 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/game_title_textfield"
-                android:layout_column="1" />
+                android:layout_column="1"
+                android:text="My Game"
+                android:textAlignment="center" />
 
         </TableRow>
 
@@ -102,7 +104,8 @@
         android:layout_alignEnd="@+id/tableLayout"
         android:layout_marginEnd="54dp"
         android:layout_alignTop="@+id/start_date_button"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="showTimePickerDialog"/>
 
     <TextView
         android:layout_width="wrap_content"
