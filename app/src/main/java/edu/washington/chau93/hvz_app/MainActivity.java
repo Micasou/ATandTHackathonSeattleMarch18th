@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import edu.washington.chau93.hvz_app.models.FirebaseHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // Make a firebase helper reference.
+        final FirebaseHelper fbHelper = new FirebaseHelper(this);
     }
 
     @Override
