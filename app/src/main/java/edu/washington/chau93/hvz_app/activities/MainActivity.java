@@ -11,7 +11,9 @@ import com.firebase.client.AuthData;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -24,9 +26,12 @@ import edu.washington.chau93.hvz_app.models.GameMode;
 import edu.washington.chau93.hvz_app.models.GameStatus;
 
 public class MainActivity extends AppCompatActivity implements Observer {
+    /** A tag for debugging. */
     private static final String TAG = MainActivity.class.getName();
+    /** The firebase helper reference */
     protected static FirebaseHelper myFirebaseHelper;
-
+    /** A Map of all the games currently in the db */
+    protected static final Map<String, Game> MY_GAME_MAP = new HashMap<>();
     /** The button used to search for nearby games. */
     private Button myGamesButton;
     /** The button used to show the rules of HvZ. */
@@ -46,11 +51,12 @@ public class MainActivity extends AppCompatActivity implements Observer {
         myRulesButton = (Button) findViewById(R.id.rules_button);
         myAboutButton = (Button) findViewById(R.id.about_button);
         myLogoutButton = (Button) findViewById(R.id.logout_button);
+
+        // Make a firebase helper reference. This needs to be before setupMenuBtns
+        myFirebaseHelper = new FirebaseHelper(this);
+
         // Sets up the menu buttons.
         setupMenuButtons();
-
-        // Make a firebase helper reference.
-        myFirebaseHelper = new FirebaseHelper(this);
     }
 
     // Returns our firebase helper reference
@@ -92,7 +98,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
 //                        latlong);
 
 //                myFirebaseHelper.createGame(game);
-//                myFirebaseHelper.addObserver(MainActivity.this);
+                myFirebaseHelper.addObserver(MainActivity.this);
+                myFirebaseHelper.getAllGames();
 //                myFirebaseHelper.getGame("-KDFFLNLkcz9gKcSr_BB");
 //                Log.d(TAG, "Clicked");
 //            }
@@ -104,21 +111,13 @@ public class MainActivity extends AppCompatActivity implements Observer {
         myLogoutButton.setOnClickListener(new LogoutClickListener());
     }
 
-
-    private Game testGame;
     @Override
     public void update(Observable observable, Object data) {
-        Log.d(TAG, "Update happened." + data);
-        if (data instanceof Game) {
-            testGame = (Game) data;
-            Log.d(TAG, "Game info: " + testGame.toString());
-        }
-        if (data instanceof FirebaseHelper.FirebaseHelperStatus) {
-            FirebaseHelper.FirebaseHelperStatus fbhs = (FirebaseHelper.FirebaseHelperStatus) data;
-            if (fbhs == FirebaseHelper.FirebaseHelperStatus.USER_ADDED_CHANGED) {
-                Log.d(TAG, testGame.getMyHumanMap().toString());
-            }
-        }
+        Log.d(TAG, "Map data: " + MY_GAME_MAP.toString());
+    }
+
+    public static Map<String, Game> getMyGameMap() {
+        return MY_GAME_MAP;
     }
 
     /**
