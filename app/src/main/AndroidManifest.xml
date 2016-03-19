@@ -54,6 +54,11 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".activities.QRScan"/>
         <activity android:name=".activities.HumanQRCode"/>
+
+        <activity
+            android:name=".activities.LobbyActivity"
+            android:label="@string/title_activity_lobby"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
