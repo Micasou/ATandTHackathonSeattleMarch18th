@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import edu.washington.chau93.hvz_app.MapsActivity;
 import edu.washington.chau93.hvz_app.R;
 import edu.washington.chau93.hvz_app.models.CustomLatLng;
 import edu.washington.chau93.hvz_app.models.FirebaseHelper;

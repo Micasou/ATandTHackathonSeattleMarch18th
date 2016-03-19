@@ -15,7 +15,6 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 
-import edu.washington.chau93.hvz_app.MapsActivity;
 import edu.washington.chau93.hvz_app.R;
 
 public class CreateGameActivity extends AppCompatActivity {

@@ -50,7 +50,7 @@ public class Game {
 
     public Game(long myStartTime, long myEndTime, GameMode myGameMode, GameStatus gameStatus
             , List<String> myHumanIdList, List<String> myZombieIdList, boolean myGameIsPrivate
-            , int myMaxPlayers, String myOwnerUID, List<Double> myBoundries) {
+            , String myOwnerUID, List<Double> myBoundries) {
         this.myEndTime = myEndTime;
         this.myStartTime = myStartTime;
         this.myGameMode = myGameMode;
