@@ -11,16 +11,21 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
+    /** The login button. */
+    private Button myLoginButton;
+    /** The text view for register text. */
+    private TextView myRegisterText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button loginBtn = (Button) findViewById(R.id.loginLoginBtn);
-        TextView register = (TextView) findViewById(R.id.loginRegisterText);
+        myLoginButton = (Button) findViewById(R.id.loginLoginBtn);
+        myRegisterText = (TextView) findViewById(R.id.loginRegisterText);
 
-        loginBtn.setOnClickListener(new LoginClickListener());
-        register.setOnClickListener(new RegisterClickListener());
+        myLoginButton.setOnClickListener(new LoginClickListener());
+        myRegisterText.setOnClickListener(new RegisterClickListener());
 
     }
 
@@ -32,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Toast.makeText(LoginActivity.this, "Login Clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
 //            Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
 //            startActivity(intent);
 //            finish();

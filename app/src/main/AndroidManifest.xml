@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.washington.chau93.hvz_app">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -23,8 +24,10 @@
             android:name=".LoginActivity"
             android:label="@string/LoginLabel">
         </activity>
-    <activity android:name=".RegisterActivity"
-        android:label="@string/RegisterLabel"></activity>
-</application>s
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/RegisterLabel" />
+        <activity android:name=".MenuActivity"></activity>
+    </application>
 
 </manifest>
