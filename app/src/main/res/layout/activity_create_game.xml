@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".activities.CreateGameActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Create a Game"
+        android:id="@+id/create_title_text"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/create_title_text"
+        android:layout_alignParentStart="true"
+        android:id="@+id/tableLayout">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:stretchColumns="0,1"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Game Title:"
+                android:id="@+id/game_title_text"
+                android:layout_column="0"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/game_title_textfield"
+                android:layout_column="1" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Max Players:"
+                android:id="@+id/max_players_text"
+                android:layout_column="0"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/max_players_textfield"
+                android:layout_column="1" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="START DATE"
+        android:id="@+id/start_date_button"
+        android:layout_below="@+id/tableLayout"
+        android:layout_alignEnd="@+id/start_date_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Month Day, Year  "
+        android:id="@+id/start_date_text"
+        android:layout_below="@+id/start_date_button"
+        android:layout_toStartOf="@+id/start_time_button" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="START TIME"
+        android:id="@+id/start_time_button"
+        android:layout_alignEnd="@+id/tableLayout"
+        android:layout_marginEnd="54dp"
+        android:layout_alignTop="@+id/start_date_button"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="HH:MM AM/PM"
+        android:id="@+id/start_time_text"
+        android:layout_alignTop="@+id/start_date_text"
+        android:layout_alignStart="@+id/start_time_button" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableLayout2"
+        android:layout_below="@+id/start_date_text"
+        android:layout_alignParentStart="true">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:stretchColumns="0,1"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Game Duration"
+                android:id="@+id/textView4"
+                android:layout_column="0"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/editText2"
+                android:layout_column="1" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Max Players:"
+                android:id="@+id/textView5"
+                android:layout_column="0"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText3"
+                android:layout_column="1" />
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

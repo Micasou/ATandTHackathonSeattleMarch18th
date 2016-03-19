@@ -1,15 +1,15 @@
-package edu.washington.chau93.hvz_app.models;
+package edu.washington.chau93.hvz_app.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import edu.washington.chau93.hvz_app.R;
 
-public class RulesActivity extends AppCompatActivity {
+public class CreateGameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rules);
+        setContentView(R.layout.activity_create_game);
     }
 }

@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/scrollView"
-    tools:context="edu.washington.chau93.hvz_app.RegisterActivity">
+    tools:context=".activities.RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
