@@ -147,14 +147,6 @@
         android:layout_toEndOf="@+id/game_duration_field"
         android:textSize="20dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CREATE GAME"
-        android:id="@+id/create_game_button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -175,5 +167,13 @@
         android:id="@+id/spinner"
         android:layout_alignTop="@+id/game_mode_text"
         android:layout_alignEnd="@+id/tableLayout" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SELECT GAME AREA"
+        android:id="@+id/map_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/create_title_text" />
 
 </RelativeLayout>

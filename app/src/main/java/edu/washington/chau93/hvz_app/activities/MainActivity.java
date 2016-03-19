@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         // Connect the layout button elements to this activity
-        myGamesButton = (Button) findViewById(R.id.games_button);
+        myGamesButton = (Button) findViewById(R.id.create_button);
         myRulesButton = (Button) findViewById(R.id.rules_button);
         myAboutButton = (Button) findViewById(R.id.about_button);
         myLogoutButton = (Button) findViewById(R.id.logout_button);
@@ -49,22 +49,12 @@ public class MainActivity extends AppCompatActivity {
      * This method sets up all the menu activities used.
      */
     private void setupMenuButtons() {
-        myGamesButton.setOnClickListener(new MapClickListener());
+        myGamesButton.setOnClickListener(new MenuButtonListener(CreateGameActivity.class));
         myRulesButton.setOnClickListener(new MenuButtonListener(RulesActivity.class));
         myAboutButton.setOnClickListener(new MenuButtonListener(AboutActivity.class));
         myLogoutButton.setOnClickListener(new LogoutClickListener());
     }
-    /**
-     * Listens to the click on Maps for testing purposes button.
-     */
-    private class MapClickListener implements View.OnClickListener {
 
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            startActivity(intent);
-        }
-    }
 
     /**
      * This listener is for menu buttons.
