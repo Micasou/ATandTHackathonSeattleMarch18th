@@ -3,6 +3,7 @@ package edu.washington.chau93.hvz_app;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,8 +22,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+import java.util.Arrays;
+import java.util.List;
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
+        GoogleMap.OnMapClickListener,
+        GoogleMap.OnMarkerDragListener {
     /**Google map object */
     private GoogleMap myMap;
     /**Boolean to determine if user is creating the game*/
@@ -37,6 +45,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationManager myLocationManager;
     /** Creating a criteria object to retrieve provider*/
     Criteria myCriteria;
+    /** Polygon shape that resizes with the inner+outter bounds */
+    Polygon myBounds;
 
     /**Init all variables for the map. Constructor*/
     @Override
@@ -85,17 +95,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 myPosition = new LatLng(latitude, longitude);
                 double offset = .0003; //Used to offset the location for the initial markers
                 LatLng tempMarker = new LatLng(myPosition.latitude+offset, myPosition.longitude+offset);
-                Marker myUpperLeftBound = myMap.addMarker(new MarkerOptions()
+                myUpperLeftBound = myMap.addMarker(new MarkerOptions()
                         .position(tempMarker)
                         .draggable(true)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                 tempMarker = new LatLng(myPosition.latitude-offset, myPosition.longitude-offset);
-                Marker myLowerRightBound = myMap.addMarker(new MarkerOptions()
+                myLowerRightBound = myMap.addMarker(new MarkerOptions()
                         .position(tempMarker)
                         .draggable(true)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                this.drawPolygon();
+                myMap.setOnMarkerDragListener(this);
                 myMap.moveCamera(CameraUpdateFactory.newLatLng(myPosition));
-
             } else {
                 //location wasn't retrieved, must do stuff
                 //TODO IMPLEMENT ALTERNATIVE
@@ -103,5 +114,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // Add a marker in Sydney a
         }
     }
+    /** Creates the polygon that outlines the playable map area */
+    private void drawPolygon() {
+        LatLng tempLatLng = new LatLng((myLowerRightBound.getPosition().latitude+myUpperLeftBound.getPosition().latitude)/2,
+                (myLowerRightBound.getPosition().longitude+myUpperLeftBound.getPosition().longitude)/2
+        );
+        if(myBounds != null)
+            myBounds.remove();
+        myBounds = myMap.addPolygon(new PolygonOptions()
+                .addAll(createRectangle(tempLatLng,
+                        (myLowerRightBound.getPosition().latitude-myUpperLeftBound.getPosition().latitude)*2,
+                        (myLowerRightBound.getPosition().longitude-myUpperLeftBound.getPosition().longitude)*2))
+                .addHole(createRectangle(tempLatLng,
+                        (myLowerRightBound.getPosition().latitude-myUpperLeftBound.getPosition().latitude)/2,
+                        (myLowerRightBound.getPosition().longitude-myUpperLeftBound.getPosition().longitude)/2))
+                .fillColor(Color.RED));
+    }
+    /** Given a center point and half the width + height create list of points for rectangle */
+    private List<LatLng> createRectangle(LatLng center, double halfWidth, double halfHeight) {
+        return Arrays.asList(new LatLng(center.latitude - halfHeight, center.longitude - halfWidth),
+                new LatLng(center.latitude - halfHeight, center.longitude + halfWidth),
+                new LatLng(center.latitude + halfHeight, center.longitude + halfWidth),
+                new LatLng(center.latitude + halfHeight, center.longitude - halfWidth),
+                new LatLng(center.latitude - halfHeight, center.longitude - halfWidth));
+    }
+    @Override
+    public void onMarkerDrag(Marker theMarker) {
+    }
+    /**Event to handle resizing the playable map area*/
+    @Override
+    public void onMarkerDragEnd(Marker theMarker) {
+        theMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        theMarker.setFlat(true);
+        this.drawPolygon();
+    }
+
+    @Override
+    public void onMarkerDragStart(Marker theMarker) {
+    }
+
+    @Override
+    public void onMapClick(LatLng arg0) {
+        // TODO Auto-generated method stub
+       // map.animateCamera(CameraUpdateFactory.newLatLng(arg0));
+    }
+
 
 }
