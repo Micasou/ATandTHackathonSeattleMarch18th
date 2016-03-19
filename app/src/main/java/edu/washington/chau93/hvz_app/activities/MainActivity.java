@@ -7,6 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> development
 import com.firebase.client.AuthData;
 
 import java.util.ArrayList;
@@ -17,6 +22,10 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+<<<<<<< HEAD
+>>>>>>> development
+=======
+>>>>>>> development
 import edu.washington.chau93.hvz_app.MapsActivity;
 import edu.washington.chau93.hvz_app.R;
 import edu.washington.chau93.hvz_app.models.CustomLatLng;
