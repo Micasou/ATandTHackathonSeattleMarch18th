@@ -1,7 +1,6 @@
 package edu.washington.chau93.hvz_app.activities;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Criteria;
@@ -9,8 +8,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import java.util.Observer;
-import java.util.Observable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import com.google.android.gms.appindexing.Action;
@@ -20,9 +17,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
@@ -30,14 +27,14 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import edu.washington.chau93.hvz_app.R;
 import edu.washington.chau93.hvz_app.models.Game;
-import edu.washington.chau93.hvz_app.models.GameMode;
-import edu.washington.chau93.hvz_app.models.GameStatus;
 
-public class InGameMapsActivity extends FragmentActivity implements OnMapReadyCallback,
-        GoogleMap.OnMapClickListener {
+public class InGameMapsActivity extends FragmentActivity implements OnMapReadyCallback
+       {
     /**
      * Google map object
      */
@@ -68,6 +65,8 @@ public class InGameMapsActivity extends FragmentActivity implements OnMapReadyCa
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+   // private Timer myTimer;
+    List<HumanPings> humanPings;
 
     /**
      * Init all variables for the map. Constructor
@@ -76,19 +75,36 @@ public class InGameMapsActivity extends FragmentActivity implements OnMapReadyCa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.in_game_activity_maps);
+        if(humanPings== null)
+            humanPings = new ArrayList<HumanPings>();
 
+        myGame = MainActivity.getMyGameMap().get("-KDG8ojSYUYEWBGSO1hM");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+     /*   myTimer = new Timer();
+        myTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                updatePings();
+            }
+        }, 0, 10000);*/
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
+    private void updatePings() {
+        if(!humanPings.isEmpty()) {
+            for (HumanPings i : humanPings) {
+                i.decay();
+            }
+        }
+    }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         myMap = googleMap;
-        myLatLngPoints = myGame.getMyBoundries();
+        if(myGame != null) {
+            myLatLngPoints = myGame.getMyBoundries();
         //Checking that users has accepted permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -108,13 +124,20 @@ public class InGameMapsActivity extends FragmentActivity implements OnMapReadyCa
                 double longitude = location.getLongitude();
                 // Creating a LatLng object for the current location
                 myPosition = new LatLng(latitude, longitude);
+                myMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
 
+                    @Override
+                    public void onMapClick(LatLng point) {
+                        humanPings.add(new HumanPings(point));
+                    }
+                });
                 this.drawPolygon();
                 myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 19));
             } else {
                 //location wasn't retrieved, must do stuff
                 //TODO IMPLEMENT ALTERNATIVE
             }
+        }
         }
     }
 
@@ -155,49 +178,33 @@ public class InGameMapsActivity extends FragmentActivity implements OnMapReadyCa
                 new LatLng(center.latitude + greater, center.longitude - greater),
                 new LatLng(center.latitude - greater, center.longitude - greater));
     }
-    @Override
-    public void onMapClick(LatLng arg0) {
-        // TODO Auto-generated method stub
-        // map.animateCamera(CameraUpdateFactory.newLatLng(arg0));
-    }
+//    @Override
+//    public void onMapClick(LatLng arg0) {
+//        humanPings.add(new HumanPings(arg0));
+//    }
+    private class HumanPings {
+        private double radius;
+        private CircleOptions myCircleOptions;
+        private int myOpcaity;
+        private LatLng myCenter;
+        private Circle myCirlce;
+        public HumanPings(LatLng center){
+            myOpcaity = 255;
+            radius = 10; //measured in meters
+            myCenter = center;
+            myCircleOptions = new CircleOptions().center(myCenter).radius(radius).fillColor(Color.argb(myOpcaity,255,0,0));
+            myCirlce = myMap.addCircle(myCircleOptions);
+        }
+        private void decay() {
+            myOpcaity -= 255*.1;
+            radius += 2;
+            if(myOpcaity < 50) {
+                myCirlce.remove();
+                return;
+            }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "InGameMaps Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://edu.washington.chau93.hvz_app.activities/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "InGameMaps Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://edu.washington.chau93.hvz_app.activities/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+            myCirlce.setRadius(radius);
+            myCirlce.setFillColor(Color.argb(myOpcaity,255,0,0));
+        }
     }
 }

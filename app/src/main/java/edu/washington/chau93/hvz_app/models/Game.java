@@ -17,6 +17,8 @@ import java.util.Map;
 public class Game {
     /** The game unique ID */
     private String myGameUID;
+
+    private String myGameTitle;
     /** The game start time in milliseconds. */
     private long myStartTime;
     /** The game end time in milliseconds. */
@@ -50,7 +52,7 @@ public class Game {
 
     public Game(long myStartTime, long myEndTime, GameMode myGameMode, GameStatus gameStatus
             , List<String> myHumanIdList, List<String> myZombieIdList, boolean myGameIsPrivate
-            , String myOwnerUID, List<Double> myBoundries) {
+            , String myOwnerUID, List<Double> myBoundries, String theGameTitle) {
         this.myEndTime = myEndTime;
         this.myStartTime = myStartTime;
         this.myGameMode = myGameMode;
@@ -62,6 +64,7 @@ public class Game {
         this.myGameIsPrivate = myGameIsPrivate;
         this.myOwnerUID = myOwnerUID;
         this.myBoundries = myBoundries;
+        this.myGameTitle = theGameTitle;
     }
 
     public String getMyGameUID() {

@@ -27,7 +27,6 @@ import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import edu.washington.chau93.hvz_app.R;
@@ -71,13 +70,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Bundle extras = myGameIntent.getExtras();
                 if (extras != null) {
                     String GAME_TITLE = extras.getString("GAME_TITLE");
-                    //long START_DATE_TIME = extras.getLong("START_DATE_TIME");
+                    long START_DATE_TIME = extras.getLong("START_DATE_TIME");
                     long GAME_DURATION = extras.getLong("GAME_DURATION");
                     List<String> users = new ArrayList<String>();
                     users.add(MainActivity.getMyFirebaseHelper().getAuth().getUid());
-                    Game aGame = new Game(0,GAME_DURATION, new GameMode(),GameStatus.WAITING,
-                            users, new ArrayList<String>(), false, users.get(0), myLatLngPoints );
+                    Game aGame = new Game(START_DATE_TIME,GAME_DURATION, new GameMode(),GameStatus.WAITING,
+                            users, new ArrayList<String>(), false, users.get(0), myLatLngPoints, GAME_TITLE );
                     MainActivity.getMyFirebaseHelper().createGame(aGame);
+                    Intent intent = new Intent(MapsActivity.this, InGameMapsActivity.class);
+                    startActivity(intent);
+
                 }
             }
         });
