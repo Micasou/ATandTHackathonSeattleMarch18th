@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+
 import com.firebase.client.AuthData;
 
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-
 import edu.washington.chau93.hvz_app.R;
 import edu.washington.chau93.hvz_app.models.CustomLatLng;
 import edu.washington.chau93.hvz_app.models.FirebaseHelper;
@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private Button myAboutButton;
     /** The button used to log out. */
     private Button myLogoutButton;
+    /** The button used to join a game. */
+    private Button myJoinButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         myRulesButton = (Button) findViewById(R.id.rules_button);
         myAboutButton = (Button) findViewById(R.id.about_button);
         myLogoutButton = (Button) findViewById(R.id.logout_button);
+        myJoinButton = (Button) findViewById(R.id.join_button);
 
         // Make a firebase helper reference. This needs to be before setupMenuBtns
         myFirebaseHelper = new FirebaseHelper(this);
@@ -105,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 //        });
 //        myGamesButton.setOnClickListener(new MenuButtonListener(GameDetailsActivity.class));
         myGamesButton.setOnClickListener(new MenuButtonListener(CreateGameActivity.class));
+        myJoinButton.setOnClickListener(new MenuButtonListener(LobbyActivity.class));
         myRulesButton.setOnClickListener(new MenuButtonListener(RulesActivity.class));
         myAboutButton.setOnClickListener(new MenuButtonListener(AboutActivity.class));
         myLogoutButton.setOnClickListener(new LogoutClickListener());

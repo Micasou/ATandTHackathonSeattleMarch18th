@@ -13,9 +13,74 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="PLACEHOLDER TEXT FOR ABOUT ACTIVITY"
+        android:text="This app was created by:"
         android:id="@+id/textView"
+        android:layout_marginTop="65dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="About"
+        android:id="@+id/textView2"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Aaron Chau"
+        android:id="@+id/name1"
+        android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="157dp" />
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Alex Orozco"
+        android:id="@+id/name2"
+        android:layout_below="@+id/name1"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Can Huynh"
+        android:id="@+id/name3"
+        android:layout_below="@+id/name2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Henry Lai"
+        android:id="@+id/name4"
+        android:layout_below="@+id/name3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="at the AT&amp;T Parks and Recreation "
+        android:id="@+id/textView8"
+        android:layout_below="@+id/name4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Mobile App hack-a-thon!"
+        android:id="@+id/textView9"
+        android:layout_below="@+id/textView8"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

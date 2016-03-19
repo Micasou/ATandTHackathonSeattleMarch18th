@@ -1,3 +1,4 @@
+
 package edu.washington.chau93.hvz_app.activities;
 
 import android.Manifest;
@@ -138,8 +139,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
                 this.drawPolygon();
                 myMap.setOnMarkerDragListener(this);
-               // CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(myPosition, 5);
-              //  myMap.animateCamera(yourLocation);
+                // CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(myPosition, 5);
+                //  myMap.animateCamera(yourLocation);
                 myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 19));
             } else {
                 //location wasn't retrieved, must do stuff
@@ -189,8 +190,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     /**Event to handle resizing the playable map area*/
     @Override
     public void onMarkerDragEnd(Marker theMarker) {
-       // theMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-       // theMarker.setFlat(true);
+        // theMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        // theMarker.setFlat(true);
         this.drawPolygon();
     }
 
@@ -201,6 +202,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapClick(LatLng arg0) {
         // TODO Auto-generated method stub
-       // map.animateCamera(CameraUpdateFactory.newLatLng(arg0));
+        // map.animateCamera(CameraUpdateFactory.newLatLng(arg0));
     }
 }

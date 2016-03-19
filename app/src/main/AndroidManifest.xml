@@ -22,23 +22,21 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".models.FirebaseAuthCheck">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:label="@string/LoginLabel">
-        </activity>
+            android:label="@string/LoginLabel" />
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/RegisterLabel" />
         <activity android:name=".activities.MenuActivity" />
         <activity android:name=".activities.AboutActivity" />
         <activity android:name=".activities.RulesActivity" />
-        <activity android:name=".activities.CreateGameActivity"></activity>
+        <activity android:name=".activities.CreateGameActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -89,10 +87,13 @@
             <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             -->
+        <activity android:name=".activities.QRScan"/>
+        <activity android:name=".activities.HumanQRCode"/>
+
         <activity
             android:name=".activities.LobbyActivity"
             android:label="@string/title_activity_lobby"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
