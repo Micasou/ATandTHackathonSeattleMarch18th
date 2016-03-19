@@ -3,6 +3,7 @@ package edu.washington.chau93.hvz_app.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     /** The editText for login password. */
     private EditText myPassword;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,14 @@ public class LoginActivity extends AppCompatActivity {
 
         Firebase.setAndroidContext(this);
         ref = new Firebase("https://hvzdatabase.firebaseio.com");
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            String user = extras.getString("username");
+            String pass = extras.getString("password");
+            ref.authWithPassword(user, pass, new loginAuthResultHandler());
+        }
 
         myLoginButton = (Button) findViewById(R.id.loginLoginBtn);
         myRegisterText = (TextView) findViewById(R.id.loginRegisterText);
@@ -45,6 +56,24 @@ public class LoginActivity extends AppCompatActivity {
         myUserName = (EditText)findViewById(R.id.loginUsername);
         myPassword = (EditText)findViewById(R.id.loginPass);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // TODO: Make loading screen spinner and disable clickable
+        // TODO: Populate login info?
+
+        // Get login information passed from intent.
+        Bundle extras = getIntent().getExtras();
+
+        // If there there is login info, login.
+        if (extras != null) {
+            String user = extras.getString("username");
+            String pass = extras.getString("password");
+            ref.unauth();
+            ref.authWithPassword(user, pass, new loginAuthResultHandler());
+        }
     }
 
     /**
@@ -79,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onAuthenticated(AuthData authData) {
             Toast.makeText(LoginActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK  | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         }
@@ -86,6 +116,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onAuthenticationError(FirebaseError firebaseError) {
             Toast.makeText(LoginActivity.this, firebaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            // TODO: fix login auth error when logging in from register.
+            Log.e("Login", firebaseError.getMessage());
         }
     }
 

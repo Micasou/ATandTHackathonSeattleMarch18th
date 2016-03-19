@@ -49,11 +49,22 @@ public class MainActivity extends AppCompatActivity {
      * This method sets up all the menu activities used.
      */
     private void setupMenuButtons() {
-        //myGamesButton.setOnClickListener(new MenuButtonListener(GameDetailsActivity.class));
+        myGamesButton.setOnClickListener(new MapClickListener());
         myRulesButton.setOnClickListener(new MenuButtonListener(RulesActivity.class));
         myAboutButton.setOnClickListener(new MenuButtonListener(AboutActivity.class));
+        myLogoutButton.setOnClickListener(new LogoutClickListener());
     }
+    /**
+     * Listens to the click on Maps for testing purposes button.
+     */
+    private class MapClickListener implements View.OnClickListener {
 
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(intent);
+        }
+    }
 
     /**
      * This listener is for menu buttons.
@@ -75,6 +86,20 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, myClass);
             startActivity(intent);
+        }
+    }
+
+    /**
+     * Listens to logout click.
+     */
+    private class LogoutClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            myFirebaseHelper.logout();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

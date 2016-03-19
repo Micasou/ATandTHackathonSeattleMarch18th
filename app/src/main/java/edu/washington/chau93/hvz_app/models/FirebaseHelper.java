@@ -40,6 +40,12 @@ public class FirebaseHelper extends Observable {
     public AuthData getAuth() {
         return myBaseRef.getAuth();
     }
+    
+    public void logout() { myBaseRef.unauth(); }
+
+    public void createNewUser(User theUser) {
+
+    }
 
     // Create a game given an game object
     public void createGame(final Game theGame) {

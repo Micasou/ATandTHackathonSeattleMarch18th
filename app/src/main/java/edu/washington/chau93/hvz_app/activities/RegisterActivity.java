@@ -70,7 +70,14 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         public void onSuccess() {
             Toast.makeText(RegisterActivity.this, "User Created!", Toast.LENGTH_SHORT).show();
-            ref.authWithPassword(myEmail.getText().toString(), myPassword.getText().toString(), new loginAuthResultHandler());
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            // Pass user login information to login page
+            intent.putExtra("username", myEmail.getText().toString());
+            intent.putExtra("password", myPassword.getText().toString());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+//            ref.authWithPassword(myEmail.getText().toString(), myPassword.getText().toString(), new loginAuthResultHandler());
         }
 
         @Override
@@ -79,23 +86,24 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Handles user registration with FireBase.
-     */
-    private class loginAuthResultHandler implements Firebase.AuthResultHandler {
-
-        @Override
-        public void onAuthenticated(AuthData authData) {
-            Toast.makeText(RegisterActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-        @Override
-        public void onAuthenticationError(FirebaseError firebaseError) {
-            Toast.makeText(RegisterActivity.this, firebaseError.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
+//    /**
+//     * Handles user registration with FireBase.
+//     */
+//    private class loginAuthResultHandler implements Firebase.AuthResultHandler {
+//
+//        @Override
+//        public void onAuthenticated(AuthData authData) {
+//            Toast.makeText(RegisterActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK  | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+//            finish();
+//        }
+//
+//        @Override
+//        public void onAuthenticationError(FirebaseError firebaseError) {
+//            Toast.makeText(RegisterActivity.this, firebaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 }
