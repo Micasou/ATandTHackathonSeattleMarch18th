@@ -3,7 +3,7 @@
     package="edu.washington.chau93.hvz_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -18,10 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".models.FirebaseAuthCheck">
+        <activity android:name=".models.FirebaseAuthCheck"></activity>
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/LoginLabel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,14 +32,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/LoginLabel"></activity>
-        <activity
+            android:name=".activities.RegisterActivity"
+            android:label="@string/RegisterLabel" />
+        <activity android:name=".activities.MenuActivity" />
+        <activity android:name=".activities.AboutActivity" />
+        <activity android:name=".activities.RulesActivity" />
+        <activity android:name=".activities.CreateGameActivity"></activity>
             android:name=".RegisterActivity"
             android:label="@string/RegisterLabel" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".models.AboutActivity" />
-        <activity android:name=".models.RulesActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -51,7 +54,13 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps">
+           <!-- <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+        </activity>
     </application>
 
 </manifest>
