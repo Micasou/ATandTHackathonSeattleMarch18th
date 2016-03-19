@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         //myGamesButton.setOnClickListener(new MenuButtonListener(GameDetailsActivity.class));
         myRulesButton.setOnClickListener(new MenuButtonListener(RulesActivity.class));
         myAboutButton.setOnClickListener(new MenuButtonListener(AboutActivity.class));
+        myLogoutButton.setOnClickListener(new LogoutClickListener());
     }
 
 
@@ -75,6 +76,20 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, myClass);
             startActivity(intent);
+        }
+    }
+
+    /**
+     * Listens to logout click.
+     */
+    private class LogoutClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            myFirebaseHelper.logout();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }
