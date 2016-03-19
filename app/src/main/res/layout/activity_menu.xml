@@ -10,7 +10,7 @@
         android:id="@+id/button"
         android:layout_alignParentTop="true"
         android:textSize="30dp"
-        android:background="@color/colorGreen" />
+        android:background="@color/colorBlue" />
 
     <Button
         android:layout_width="match_parent"
