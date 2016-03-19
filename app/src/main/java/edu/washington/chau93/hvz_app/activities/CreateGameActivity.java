@@ -57,7 +57,6 @@ public class CreateGameActivity extends AppCompatActivity {
         // Connecting text fields from layout to this activity.
         // TODO: Grab user input data from these TEXT FIELDS
         myGameTitleField = (EditText) findViewById(R.id.game_title_textfield);
-        myMaxPlayersField = (EditText) findViewById(R.id.max_players_textfield);
         myGameDurationField = (EditText) findViewById(R.id.game_duration_field);
 
         // Connecting buttons from layout to this activity.

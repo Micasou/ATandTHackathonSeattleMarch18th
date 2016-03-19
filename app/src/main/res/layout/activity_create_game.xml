@@ -70,7 +70,8 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/max_players_textfield"
-                android:layout_column="1" />
+                android:layout_column="1"
+                android:layout_marginTop="10dp" />
 
         </TableRow>
 
@@ -85,7 +86,7 @@
         android:layout_below="@+id/tableLayout"
         android:layout_alignEnd="@+id/start_date_text"
         android:layout_marginTop="20dp"
-        android:onClick="showDatePickerDialog"/>
+        android:onClick="showTimePickerDialog"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -130,7 +131,8 @@
         android:layout_marginRight="10dp"
         android:layout_below="@+id/start_date_text"
         android:layout_alignParentStart="true"
-        android:paddingTop="15dp" />
+        android:paddingTop="15dp"
+        android:layout_marginTop="15dp" />
 
     <EditText
         android:layout_width="100dp"
@@ -152,27 +154,6 @@
         android:layout_alignBottom="@+id/game_duration_text"
         android:layout_toEndOf="@+id/game_duration_field"
         android:textSize="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Game Mode"
-        android:id="@+id/game_mode_text"
-        android:layout_column="0"
-        android:layout_weight="1"
-        android:textSize="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/game_duration_field"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp" />
-
-    <Spinner
-        android:layout_width="170dp"
-        android:layout_height="40dp"
-        android:id="@+id/spinner"
-        android:layout_alignTop="@+id/game_mode_text"
-        android:layout_alignEnd="@+id/tableLayout" />
 
     <Button
         android:layout_width="wrap_content"
