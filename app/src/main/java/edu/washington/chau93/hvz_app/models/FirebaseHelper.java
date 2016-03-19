@@ -22,7 +22,7 @@ public class FirebaseHelper extends Observable {
 
     public FirebaseHelper(Context theContext) {
         Firebase.setAndroidContext(theContext);
-        Firebase.getDefaultConfig().setPersistenceEnabled(true);
+        // Firebase.getDefaultConfig().setPersistenceEnabled(true);
         myBaseRef = new Firebase("https://hvzdatabase.firebaseio.com/");
         myUsersRef = myBaseRef.child("users");
         myGamesRef = myBaseRef.child("games");
