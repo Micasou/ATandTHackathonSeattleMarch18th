@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(LoginActivity.this, "Register Clicked", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(LoginActivity.this, "Register Clicked", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         }
