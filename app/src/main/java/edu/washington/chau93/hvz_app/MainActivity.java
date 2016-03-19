@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import edu.washington.chau93.hvz_app.models.FirebaseHelper;
 
 public class MainActivity extends AppCompatActivity {
+    protected static FirebaseHelper myFirebaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Make a firebase helper reference.
-        final FirebaseHelper fbHelper = new FirebaseHelper(this);
+         myFirebaseHelper = new FirebaseHelper(this);
+    }
+
+    // Returns our firebase helper reference
+    // Make sure to check if firebase helper is null. (Although you really shouldn't be calling
+    // this method if you haven't gotten to main yet.)
+    public static FirebaseHelper getMyFirebaseHelper() {
+        return myFirebaseHelper;
     }
 
     @Override
