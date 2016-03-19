@@ -39,14 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         ref = new Firebase("https://hvzdatabase.firebaseio.com");
 
-        Bundle extras = getIntent().getExtras();
-
-        if (extras != null) {
-            String user = extras.getString("username");
-            String pass = extras.getString("password");
-            ref.authWithPassword(user, pass, new loginAuthResultHandler());
-        }
-
         myLoginButton = (Button) findViewById(R.id.loginLoginBtn);
         myRegisterText = (TextView) findViewById(R.id.loginRegisterText);
 
@@ -61,18 +53,19 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // TODO: Make loading screen spinner and disable clickable
-        // TODO: Populate login info?
+        // TODO: auto login
 
         // Get login information passed from intent.
         Bundle extras = getIntent().getExtras();
 
         // If there there is login info, login.
         if (extras != null) {
-            String user = extras.getString("username");
-            String pass = extras.getString("password");
-            ref.unauth();
-            ref.authWithPassword(user, pass, new loginAuthResultHandler());
+//            String user = extras.getString("username");
+//            String pass = extras.getString("password");
+//            ref.unauth();
+//            ref.authWithPassword(user, pass, new loginAuthResultHandler());
+            myUserName.setText(extras.getString("username"));
+            myPassword.setText(extras.getString("password"));
         }
     }
 
@@ -116,8 +109,6 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onAuthenticationError(FirebaseError firebaseError) {
             Toast.makeText(LoginActivity.this, firebaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            // TODO: fix login auth error when logging in from register.
-            Log.e("Login", firebaseError.getMessage());
         }
     }
 

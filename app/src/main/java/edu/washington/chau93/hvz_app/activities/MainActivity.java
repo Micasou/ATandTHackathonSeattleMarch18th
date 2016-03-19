@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import edu.washington.chau93.hvz_app.MapsActivity;
 import edu.washington.chau93.hvz_app.R;
 import edu.washington.chau93.hvz_app.models.FirebaseHelper;
 
