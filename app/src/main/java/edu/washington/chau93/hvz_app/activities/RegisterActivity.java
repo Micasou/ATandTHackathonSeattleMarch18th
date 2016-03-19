@@ -1,4 +1,4 @@
-package edu.washington.chau93.hvz_app;
+package edu.washington.chau93.hvz_app.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import edu.washington.chau93.hvz_app.R;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;

@@ -1,4 +1,4 @@
-package edu.washington.chau93.hvz_app.models;
+package edu.washington.chau93.hvz_app.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

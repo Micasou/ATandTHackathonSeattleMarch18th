@@ -1,16 +1,13 @@
-package edu.washington.chau93.hvz_app;
+package edu.washington.chau93.hvz_app.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import edu.washington.chau93.hvz_app.models.AboutActivity;
+import edu.washington.chau93.hvz_app.R;
 import edu.washington.chau93.hvz_app.models.FirebaseHelper;
-import edu.washington.chau93.hvz_app.models.RulesActivity;
 
 public class MainActivity extends AppCompatActivity {
     protected static FirebaseHelper myFirebaseHelper;

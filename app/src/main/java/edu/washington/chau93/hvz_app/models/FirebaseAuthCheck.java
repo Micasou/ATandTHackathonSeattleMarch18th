@@ -1,14 +1,11 @@
 package edu.washington.chau93.hvz_app.models;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.firebase.client.Firebase;
-
-import edu.washington.chau93.hvz_app.LoginActivity;
-import edu.washington.chau93.hvz_app.MainActivity;
+import edu.washington.chau93.hvz_app.activities.LoginActivity;
+import edu.washington.chau93.hvz_app.activities.MainActivity;
 
 /**
  * Checks the firebase user authentication and

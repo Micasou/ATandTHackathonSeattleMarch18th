@@ -1,9 +1,11 @@
-package edu.washington.chau93.hvz_app;
+package edu.washington.chau93.hvz_app.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import edu.washington.chau93.hvz_app.R;
 
 /**
  * Created by Henry on 3/18/2016.
