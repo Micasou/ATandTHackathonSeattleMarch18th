@@ -5,7 +5,8 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Nearby Games"
         android:id="@+id/games_button"
         android:layout_alignParentTop="true"
@@ -14,7 +15,8 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Rules"
         android:id="@+id/rules_button"
         android:layout_below="@+id/games_button"
@@ -24,7 +26,8 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="About"
         android:id="@+id/about_button"
         android:layout_below="@+id/rules_button"
@@ -34,7 +37,8 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Logout"
         android:id="@+id/logout_button"
         android:layout_below="@+id/about_button"
