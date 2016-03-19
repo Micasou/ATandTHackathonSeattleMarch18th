@@ -3,13 +3,28 @@ package edu.washington.chau93.hvz_app.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import edu.washington.chau93.hvz_app.R;
-import edu.washington.chau93.hvz_app.models.FirebaseHelper;
+import com.firebase.client.AuthData;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
+import edu.washington.chau93.hvz_app.MapsActivity;
+import edu.washington.chau93.hvz_app.R;
+import edu.washington.chau93.hvz_app.models.CustomLatLng;
+import edu.washington.chau93.hvz_app.models.FirebaseHelper;
+import edu.washington.chau93.hvz_app.models.Game;
+import edu.washington.chau93.hvz_app.models.GameMode;
+import edu.washington.chau93.hvz_app.models.GameStatus;
+
+public class MainActivity extends AppCompatActivity implements Observer {
+    private static final String TAG = MainActivity.class.getName();
     protected static FirebaseHelper myFirebaseHelper;
 
     /** The button used to search for nearby games. */
@@ -50,6 +65,41 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setupMenuButtons() {
         myGamesButton.setOnClickListener(new MapClickListener());
+
+//        myGamesButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+                // Adding a new game
+//                final Calendar startCal = Calendar.getInstance();
+//                final Calendar endCal = Calendar.getInstance();
+//                endCal.add(Calendar.DATE, 14);
+//                final List<String> humanIdList = new ArrayList<String>();
+//                AuthData myAuth = myFirebaseHelper.getAuth();
+//                humanIdList.add(myAuth.getUid());
+//                final List<Double> latlong = new ArrayList<Double>();
+//                latlong.add(47.612843);
+//                latlong.add(-122.333678);
+//                latlong.add(47.612259);
+//                latlong.add(-122.335223);
+//
+//                Game game = new Game(startCal.getTimeInMillis(),
+//                        endCal.getTimeInMillis(),
+//                        new GameMode(),
+//                        GameStatus.WAITING,
+//                        humanIdList,
+//                        new ArrayList<String>(),
+//                        false,
+//                        100,
+//                        myAuth.getUid(),
+//                        latlong);
+
+//                myFirebaseHelper.createGame(game);
+//                myFirebaseHelper.addObserver(MainActivity.this);
+//                myFirebaseHelper.getGame("-KDFFLNLkcz9gKcSr_BB");
+//                Log.d(TAG, "Clicked");
+//            }
+//        });
+//        myGamesButton.setOnClickListener(new MenuButtonListener(GameDetailsActivity.class));
         myRulesButton.setOnClickListener(new MenuButtonListener(RulesActivity.class));
         myAboutButton.setOnClickListener(new MenuButtonListener(AboutActivity.class));
         myLogoutButton.setOnClickListener(new LogoutClickListener());
@@ -63,6 +113,22 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(intent);
+        }
+    }
+
+    private Game testGame;
+    @Override
+    public void update(Observable observable, Object data) {
+        Log.d(TAG, "Update happened." + data);
+        if (data instanceof Game) {
+            testGame = (Game) data;
+            Log.d(TAG, "Game info: " + testGame.toString());
+        }
+        if (data instanceof FirebaseHelper.FirebaseHelperStatus) {
+            FirebaseHelper.FirebaseHelperStatus fbhs = (FirebaseHelper.FirebaseHelperStatus) data;
+            if (fbhs == FirebaseHelper.FirebaseHelperStatus.USER_ADDED_CHANGED) {
+                Log.d(TAG, testGame.getMyHumanMap().toString());
+            }
         }
     }
 

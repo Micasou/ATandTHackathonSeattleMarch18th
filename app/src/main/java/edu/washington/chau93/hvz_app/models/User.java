@@ -12,20 +12,18 @@ import java.util.List;
 public class User {
     private String myUID;
     private String myDisplayName;
-    private LatLng myLocation;
-    private List<Game> myGames;
+    private List<Double> myLocation;
 
     public User() {}
 
-    public User(String myDisplayName, LatLng myLocation, List<Game> myGames) {
+    public User(String myDisplayName, List<Double> myLocation, List<Game> myGames) {
         this(null, myDisplayName, myLocation, myGames);
     }
 
-    public User(String myUID, String myDisplayName, LatLng myLocation, List<Game> myGames) {
+    public User(String myUID, String myDisplayName, List<Double> myLocation, List<Game> myGames) {
         this.myUID = myUID;
         this.myDisplayName = myDisplayName;
         this.myLocation = myLocation;
-        this.myGames = myGames;
     }
 
     public String getMyUID() {
@@ -36,11 +34,16 @@ public class User {
         return myDisplayName;
     }
 
-    public List<Game> getMyGames() {
-        return myGames;
+    public List<Double> getMyLocation() {
+        return myLocation;
     }
 
-    public LatLng getMyLocation() {
-        return myLocation;
+    @Override
+    public String toString() {
+        return "User{" +
+                "myUID='" + myUID + '\'' +
+                ", myDisplayName='" + myDisplayName + '\'' +
+                ", myLocation=" + myLocation +
+                '}';
     }
 }

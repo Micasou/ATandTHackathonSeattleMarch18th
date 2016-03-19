@@ -71,6 +71,7 @@ public class FirebaseHelper extends Observable {
         game.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
+                Log.d(TAG, dataSnapshot.toString());
                 // Get the game
                 final Game game = dataSnapshot.getValue(Game.class);
                 if (game != null) {
@@ -108,25 +109,53 @@ public class FirebaseHelper extends Observable {
             myMap = theMap;
         }
 
+        private class AddChangeValueEventListener implements ValueEventListener {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final User user = dataSnapshot.getValue(User.class);
+                myMap.put(user.getMyUID(), user);
+
+                setChanged();
+                notifyObservers(FirebaseHelperStatus.USER_ADDED_CHANGED);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        }
+
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            final User user = dataSnapshot.getValue(User.class);
-            myMap.put(user.getMyUID(), user);
-            notifyClasses();
+            final String userId = (String) dataSnapshot.getValue();
+            myUsersRef.child(userId).addListenerForSingleValueEvent(new AddChangeValueEventListener());
         }
 
         @Override
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            final User user = dataSnapshot.getValue(User.class);
-            myMap.put(user.getMyUID(), user);
-            notifyClasses();
+            final String userId = (String) dataSnapshot.getValue();
+            myUsersRef.child(userId).addListenerForSingleValueEvent(new AddChangeValueEventListener());
         }
 
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
-            final User user = dataSnapshot.getValue(User.class);
-            myMap.remove(user.getMyUID());
-            notifyClasses();
+            final String userId = (String) dataSnapshot.getValue();
+            myUsersRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    final User user = dataSnapshot.getValue(User.class);
+                    myMap.remove(user.getMyUID());
+
+                    setChanged();
+                    notifyObservers(FirebaseHelperStatus.USER_REMOVED);
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
         }
 
         @Override
@@ -138,15 +167,15 @@ public class FirebaseHelper extends Observable {
         public void onCancelled(FirebaseError firebaseError) {
             // Show the error
         }
-
-        private void notifyClasses() {
-            setChanged();
-            notifyObservers();
-        }
     }
 
     // Get all the available games
     public void getAllGames() {}
 
 
+    public enum FirebaseHelperStatus {
+        USER_ADDED_CHANGED,
+        USER_REMOVED,
+        GAME_RECEIVED
+    }
 }

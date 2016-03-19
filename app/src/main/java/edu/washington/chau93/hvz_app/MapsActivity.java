@@ -31,6 +31,7 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerDragListener {
+
     /**Google map object */
     private GoogleMap myMap;
     /**Boolean to determine if user is creating the game*/
@@ -52,6 +53,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        MainActivity.getMyFirebaseHelper().addObserver(this);
 
         setContentView(R.layout.activity_maps2);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -158,6 +161,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // TODO Auto-generated method stub
        // map.animateCamera(CameraUpdateFactory.newLatLng(arg0));
     }
-
-
 }

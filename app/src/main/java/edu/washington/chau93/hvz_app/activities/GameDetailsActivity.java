@@ -5,12 +5,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import edu.washington.chau93.hvz_app.R;
+import edu.washington.chau93.hvz_app.models.Game;
 
 /**
  * Created by Henry on 3/18/2016.
  */
-public class GameDetailsActivity extends AppCompatActivity {
+public class GameDetailsActivity extends AppCompatActivity implements Observer {
 
     /** The TextView displaying title of the game. */
     private TextView myGameTitle;
@@ -18,6 +22,8 @@ public class GameDetailsActivity extends AppCompatActivity {
     private TextView myPlayerCount;
     /** The join game button. */
     private Button myJoinGameButton;
+    /** The game */
+    private Game mygame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,11 @@ public class GameDetailsActivity extends AppCompatActivity {
         public void onClick(final View theButton) {
             // Join the user to the game and move to next activity (if the join is successful).
         }
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+
     }
 }
 
