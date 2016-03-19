@@ -11,7 +11,7 @@ import java.util.Map;
  * the status of the game, and finally a list of users in the
  * game.
  */
-@JsonIgnoreProperties({"myHumanList", "myZombieList", "myGameUID"})
+@JsonIgnoreProperties({"myHumanMap", "myZombieMap", "myGameMode"})
 public class Game {
     /** The game unique ID */
     private String myGameUID;
@@ -19,6 +19,8 @@ public class Game {
     private long myEndTime;
     /** The game start time in milliseconds. */
     private long myStartTime;
+    /** The game mode id. */
+    private String myGameModeId;
     /** The game mode/settings. */
     private GameMode myGameGameMode;
     /**
@@ -34,9 +36,9 @@ public class Game {
     /** A list of the zombie ids. */
     private List<String> myZombieIdList;
     /** A list of the human players. */
-    private Map<String, User> myHumanList;
+    private Map<String, User> myHumanMap;
     /** A list of zombie players. */
-    private Map<String, User> myZombieList;
+    private Map<String, User> myZombieMap;
     /** A flag if the game is private. */
     private boolean myGameIsPrivate;
     /** The maximun amount of players allowed to play. */
@@ -46,12 +48,20 @@ public class Game {
         return myGameUID;
     }
 
+    public void setMyGameUID(String theGameUID) {
+        myGameUID = theGameUID;
+    }
+
     public long getMyEndTime() {
         return myEndTime;
     }
 
     public long getMyStartTime() {
         return myStartTime;
+    }
+
+    public String getMyGameModeId() {
+        return myGameModeId;
     }
 
     public GameMode getMyGameGameMode() {
@@ -71,11 +81,11 @@ public class Game {
     }
 
     public Map<String, User> getMyHumanMap() {
-        return myHumanList;
+        return myHumanMap;
     }
 
     public Map<String, User> getMyZombieMap() {
-        return myZombieList;
+        return myZombieMap;
     }
 
     public boolean isMyGameIsPrivate() {

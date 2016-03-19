@@ -1,6 +1,7 @@
 package edu.washington.chau93.hvz_app.models;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.ChildEventListener;
@@ -16,6 +17,8 @@ import java.util.Observable;
  * Created by Aaron on 3/18/2016.
  */
 public class FirebaseHelper extends Observable {
+    // Tag for debugging
+    private static final String TAG = FirebaseHelper.class.getName();
     // The base firebase reference
     private Firebase myBaseRef;
     // The user reference
@@ -40,8 +43,16 @@ public class FirebaseHelper extends Observable {
 
     // Create a game given an game object
     public void createGame(final Game theGame) {
-
-
+        final Firebase newGameRef = myGamesRef.push();
+        theGame.setMyGameUID(newGameRef.getKey());
+        newGameRef.setValue(theGame, new Firebase.CompletionListener() {
+            @Override
+            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                if (firebaseError != null) {
+                    Log.e(TAG, "Error: " + firebaseError.getMessage());
+                }
+            }
+        });
     }
 
     // Get a user given an id. If a list is given, add the user to the list
@@ -58,6 +69,10 @@ public class FirebaseHelper extends Observable {
                 final Game game = dataSnapshot.getValue(Game.class);
                 if (game != null) {
                     getUsersInGame(game);
+
+                    // Notify the observers with the game.
+                    setChanged();
+                    notifyObservers(game);
                 }
             }
 
@@ -66,8 +81,6 @@ public class FirebaseHelper extends Observable {
                 // Show the error message
             }
         });
-        setChanged();
-        notifyObservers();
     }
 
     // Get a game mode given an id
