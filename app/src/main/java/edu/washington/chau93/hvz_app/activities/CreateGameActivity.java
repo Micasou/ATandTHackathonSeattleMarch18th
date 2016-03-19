@@ -125,6 +125,7 @@ public class CreateGameActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(CreateGameActivity.this, MapsActivity.class);
             intent.putExtra("GAME_TITLE", myGameTitleField.getText().toString());
+            intent.putExtra("MAX_PLAYERS", Integer.parseInt(myMaxPlayersField.getText().toString()));
             intent.putExtra("START_DATE_TIME", myDatePicker.getLongTime() + myTimePicker.getLongTime());
             intent.putExtra("GAME_DURATION", Integer.parseInt(myGameDurationField.getText().toString()));
             startActivity(intent);
