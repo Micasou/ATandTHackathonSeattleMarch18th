@@ -13,6 +13,8 @@ import com.firebase.client.ValueEventListener;
 import java.util.Map;
 import java.util.Observable;
 
+import edu.washington.chau93.hvz_app.activities.MainActivity;
+
 /**
  * Created by Aaron on 3/18/2016.
  */
@@ -77,6 +79,8 @@ public class FirebaseHelper extends Observable {
                 if (game != null) {
                     getUsersInGame(game);
 
+                    // Put the game in our map
+                    MainActivity.getMyGameMap().put(game.getMyGameUID(), game);
                     // Notify the observers with the game.
                     setChanged();
                     notifyObservers(game);
@@ -141,21 +145,10 @@ public class FirebaseHelper extends Observable {
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
             final String userId = (String) dataSnapshot.getValue();
-            myUsersRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    final User user = dataSnapshot.getValue(User.class);
-                    myMap.remove(user.getMyUID());
-
-                    setChanged();
-                    notifyObservers(FirebaseHelperStatus.USER_REMOVED);
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
+            // Remove the user from the player map
+            myMap.remove(userId);
+            // remove the player from the database
+            dataSnapshot.getRef().removeValue();
         }
 
         @Override
@@ -170,7 +163,34 @@ public class FirebaseHelper extends Observable {
     }
 
     // Get all the available games
-    public void getAllGames() {}
+    public void getAllGames() {
+        myGamesRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                getGame(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                getGame(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
 
 
     public enum FirebaseHelperStatus {
