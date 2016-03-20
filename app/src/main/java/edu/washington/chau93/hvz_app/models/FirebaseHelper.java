@@ -118,10 +118,12 @@ public class FirebaseHelper extends Observable {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final User user = dataSnapshot.getValue(User.class);
-                myMap.put(user.getMyUID(), user);
+                if (user != null) {
+                    myMap.put(user.getMyUID(), user);
 
-                setChanged();
-                notifyObservers(FirebaseHelperStatus.USER_ADDED_CHANGED);
+                    setChanged();
+                    notifyObservers(FirebaseHelperStatus.USER_ADDED_CHANGED);
+                }
             }
 
             @Override
